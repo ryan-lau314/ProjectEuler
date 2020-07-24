@@ -1,4 +1,4 @@
-from util.prime import prime_factorisation
+from util.factor import prime_factorisation
 
 
 if __name__ == "__main__":
