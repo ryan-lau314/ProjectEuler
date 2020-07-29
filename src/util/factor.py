@@ -22,6 +22,27 @@ def prime_factorisation(n):
     return factors
 
 
+def primes():
+    """
+    Simple prime generator. Not very efficient.
+    """
+    yield 2
+    primes = []
+    test_prime = 3
+    while True:
+        is_prime = True
+        for i in primes:
+            if test_prime % i == 0:
+                is_prime = False
+                break
+
+        if is_prime:
+            yield test_prime
+            primes.append(test_prime)
+
+        test_prime += 2
+
+
 def lcm(*vals):
     """
     Returns the lowest common multiple of all values.
