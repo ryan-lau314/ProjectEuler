@@ -43,6 +43,43 @@ def primes():
         test_prime += 2
 
 
+def primes_within_range(n):
+    for index, value in enumerate(sieve_of_eratosthenes(n)):
+        if index >= 2 and value == 0:
+            yield index
+
+
+def sieve_of_eratosthenes(n):
+    """
+    Finds all prime numbers under n.
+    Returns the array a[0...n-1]. 
+    If number n is prime, a[n] = 0.
+    If number n is composite, a[n] contains one of n's non-trivial factors.
+    """
+    sieve = [0 for _ in range(n)]
+    wheel = __wheel_factors()
+    factor = next(wheel)
+    while factor * factor < n:
+        if sieve[factor] == 0:
+            for i in range(factor * factor, n, factor):
+                sieve[i] = factor
+        factor = next(wheel)
+    return sieve
+
+
+def __wheel_factors():
+    yield 2
+    yield 3
+    yield 5
+    yield 7
+    yield 11
+    yield 13
+    factor = 17
+    while True:
+        yield factor
+        factor += 2
+
+
 def lcm(*vals):
     """
     Returns the lowest common multiple of all values.
