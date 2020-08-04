@@ -59,7 +59,7 @@ def sieve_of_eratosthenes(n):
     sieve = [0 for _ in range(n)]
     wheel = __wheel_factors()
     factor = next(wheel)
-    while factor * factor < n:
+    while factor * factor <= n:
         if sieve[factor] == 0:
             for i in range(factor * factor, n, factor):
                 sieve[i] = factor
