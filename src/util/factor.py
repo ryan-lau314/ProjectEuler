@@ -22,6 +22,22 @@ def prime_factorisation(n):
     return factors
 
 
+def divisors(n):
+    divisors_first_half = []
+    divisors_second_half = []
+
+    i = 1
+    while i * i <= n:
+        if n % i == 0:
+            divisors_first_half.append(i)
+            if i * i != n:
+                divisors_second_half.append(n // i)
+        i += 1
+
+    divisors_second_half.reverse()
+    return divisors_first_half + divisors_second_half
+
+
 def num_of_divisors(n):
     return reduce(
         lambda x, y: x * y, [power + 1 for _, power in prime_factorisation(n)], 1
