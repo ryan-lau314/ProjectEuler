@@ -1,7 +1,7 @@
 def uses_one_to_nine_exactly_once(*values):
     char_list = [char for value in values for char in str(value)]
     char_list.sort()
-    return char_list == [chr(ord('1') + i) for i in range(9)]
+    return ''.join(char_list) == '123456789'
 
 def is_pandigital(n):
     i = 1
