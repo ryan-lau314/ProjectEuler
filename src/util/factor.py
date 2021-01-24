@@ -1,4 +1,5 @@
 from functools import reduce
+import itertools as it
 
 
 def prime_factorisation(n):
@@ -46,23 +47,27 @@ def num_of_divisors(n):
 
 def primes():
     """
-    Simple prime generator. Not very efficient.
+    Slightly efficient prime generator.
     """
+    # (x, D[x]): x is a composite number, with its smallest prime = D[x].
+    D = {}
     yield 2
-    primes = []
-    test_prime = 3
-    while True:
-        is_prime = True
-        for i in primes:
-            if test_prime % i == 0:
-                is_prime = False
-                break
-
-        if is_prime:
-            yield test_prime
-            primes.append(test_prime)
-
-        test_prime += 2
+    # q in [3, 5, 7, ...]
+    for q in it.islice(it.count(3), 0, None, 2):
+        p = D.pop(q, None)
+        if p is None:
+            # Cannot find q as a key: q is prime.
+            # Record (q^2, q) in the dictionary.
+            D[q * q] = q
+            yield q
+        else:
+            # Can find q as a key: q is composite with smallest prime p.
+            # Find smallest n such that (q + 2np) is not yet recorded in dictionary.
+            # Record (q + 2np, p) in the dictionary.
+            x = q + 2 * p
+            while x in D:
+                x += 2 * p
+            D[x] = p
 
 
 def primes_within_range(n):
@@ -74,7 +79,7 @@ def primes_within_range(n):
 def sieve_of_eratosthenes(n):
     """
     Finds all prime numbers under n.
-    Returns the array a[0...n-1]. 
+    Returns the array a[0...n-1].
     If number n is prime, a[n] = 0.
     If number n is composite, a[n] contains one of n's non-trivial factors.
     """
@@ -130,4 +135,3 @@ def __gcd(x, y):
     if y == 0:
         return x
     return __gcd(y, x % y)
-
