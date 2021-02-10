@@ -1,5 +1,6 @@
 {
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "python.pythonPath": "/Users/ryan/.local/share/virtualenvs/ProjectEuler-gN7IQ35W/bin/python"
 }

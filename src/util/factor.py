@@ -1,5 +1,5 @@
 from functools import reduce
-import itertools as it
+from itertools import islice, count
 
 
 def prime_factorisation(n):
@@ -53,7 +53,7 @@ def primes():
     D = {}
     yield 2
     # q in [3, 5, 7, ...]
-    for q in it.islice(it.count(3), 0, None, 2):
+    for q in islice(count(3), 0, None, 2):
         p = D.pop(q, None)
         if p is None:
             # Cannot find q as a key: q is prime.
