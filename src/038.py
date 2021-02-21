@@ -1,29 +1,21 @@
-def gen_pandigital_for_number(n):
+def gen_pandigital_for_seed(seed):
     pandigital = ""
     i = 1
     while len(pandigital) < 9:
-        pandigital = pandigital + str(n * i)
+        pandigital = pandigital + str(seed * i)
         i += 1
     return pandigital if is_pandigital(pandigital) else None
 
 
 def is_pandigital(str):
-    if len(str) != 9 or "0" in str:
-        return False
-    exists = [False for _ in range(10)]
-    for c in str:
-        i = ord(c) - ord("0")
-        if exists[i]:
-            return False
-        exists[i] = True
-    return True
+    return "".join(sorted(str)) == "123456789"
 
 
 if __name__ == "__main__":
     best_pandigital = 123456789
 
-    for n in range(1, 10000):
-        pandigital = gen_pandigital_for_number(n)
+    for seed in range(1, 10000):
+        pandigital = gen_pandigital_for_seed(seed)
         if pandigital and int(pandigital) > best_pandigital:
             best_pandigital = int(pandigital)
-            print(f"Record update: {n} generates {pandigital}!")
+            print(f"Record update: {seed} generates {pandigital}!")
