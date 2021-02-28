@@ -1,25 +1,19 @@
 from itertools import count
 
-cache = {}
-
 
 def nth_pentagon(n):
-    if n not in cache:
-        cache[n] = n * (3 * n - 1) // 2
-    return cache[n]
+    return n * (3 * n - 1) // 2
 
 
 def is_pentagon(n):
     return (((24 * n + 1) ** 0.5) + 1) % 6 == 0
 
 
-for i in count(1):
-    large_pentagon = nth_pentagon(i)
-    for j in range(1, i):
-        small_pentagon = nth_pentagon(j)
-        sum = small_pentagon + large_pentagon
-        difference = large_pentagon - small_pentagon
-        if is_pentagon(sum) and is_pentagon(difference):
-            print(f"{large_pentagon} + {small_pentagon} = {sum}")
-            print(f"{large_pentagon} - {small_pentagon} = {difference}")
+for d in count(2):
+    D = nth_pentagon(d)
+    for i in range(1, d):
+        P_i = nth_pentagon(i)
+        j, remainder = divmod(D - P_i, 3 * i)
+        if remainder == 0 and is_pentagon(2 * nth_pentagon(j) + D):
+            print(D)
             exit(0)
