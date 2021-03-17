@@ -29,8 +29,8 @@ def merge(first_gen, second_gen):
             first = next(first_gen)
             second = next(second_gen)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     common_generator = merge(merge(triangle(), pentagon()), hexagon())
-    next(common_generator)
     next(common_generator)
     print(next(common_generator))
