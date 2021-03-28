@@ -2,6 +2,14 @@ from sympy import sieve
 
 
 def p049():
+    prime_dict = group_prime_permutations()
+
+    for primes in prime_dict.values():
+        for sequence in arithmetic_subsequence(primes):
+            print(sequence)
+
+
+def group_prime_permutations():
     prime_dict = {}
 
     for prime in sieve.primerange(1000, 9999):
@@ -9,9 +17,7 @@ def p049():
         prime_dict.setdefault(prime_key, [])
         prime_dict[prime_key].append(prime)
 
-    for primes in prime_dict.values():
-        for sequence in arithmetic_subsequence(primes):
-            print(sequence)
+    return prime_dict
 
 
 def key(prime):
